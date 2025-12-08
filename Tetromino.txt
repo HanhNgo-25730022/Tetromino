@@ -1,0 +1,39 @@
+class Tetromino {
+public:
+    
+       Tetromino() {
+              type = I;          rotation = 0;
+        // Khởi tạo ma trận khối (nếu có)
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                grid[i][j] = 0;
+            }
+        }
+        // Thiết lập hình dạng mặc định (ví dụ: I)
+        setShape(type);
+    }
+
+      explicit Tetromino(TetrominoType t) {
+        type = t;
+        rotation = 0;
+        setShape(t);
+    }
+
+       void setShape(TetrominoType t) {
+               for (auto& row : grid) std::fill(row.begin(), row.end(), 0);
+
+               static const int shapes[7][4][4] = { /* ... định nghĩa các hình ... */ };
+
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                grid[i][j] = shapes[(int)t][i][j];
+            }
+        }
+        type = t;
+    }
+
+private:
+    TetrominoType type;
+    int rotation;
+    std::array<std::array<int, 4>, 4> grid;
+};
